@@ -1,5 +1,7 @@
 package io.codewithridhwan.streamdatacollector;
 
+import io.codewithridhwan.streamdatacollector.util.Config;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +11,10 @@ import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 
 @SpringBootApplication
 public class StreamDataCollectorApplication {
-	private static final String MEETUP_RSVP_ENDPOINT = "ws://stream.meetup.com/2/rsvps";
+	@Autowired
+	private Config config;
+	//private static final String MEETUP_RSVP_ENDPOINT = con
+
 	public static void main(String[] args) {
 		SpringApplication.run(StreamDataCollectorApplication.class, args);
 	}
@@ -18,7 +23,7 @@ public class StreamDataCollectorApplication {
 	public ApplicationRunner initializeConnection(StreamDataCollectorWebsocketHandler handler){
 		return args -> {
 			WebSocketClient socketClient = new StandardWebSocketClient();
-			socketClient.doHandshake(handler,MEETUP_RSVP_ENDPOINT);
+			socketClient.doHandshake(handler,config.getSocketUrl());
 		};
 	}
 }
