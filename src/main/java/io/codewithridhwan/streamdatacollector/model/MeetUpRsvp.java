@@ -2,7 +2,7 @@ package io.codewithridhwan.streamdatacollector.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "rsvps")
+@Document(collection = "rsvp")
 public class MeetUpRsvp {
     private Venue venue;
     private String visibility;
